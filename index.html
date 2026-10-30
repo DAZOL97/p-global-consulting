@@ -14,15 +14,18 @@ header{background:rgba(16,24,32,.97);color:white;position:sticky;top:0;z-index:1
 .hero{background:linear-gradient(115deg,rgba(13,21,29,.97),rgba(13,21,29,.84)),radial-gradient(circle at 80% 20%,#7a612f,#101820 55%);color:white;padding:88px 0 78px}.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:center}.eyebrow{color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:12px}.hero h1{font-size:clamp(36px,5.5vw,64px);line-height:1.08;letter-spacing:-.04em;margin:18px 0}.hero h1 span{color:var(--gold)}.hero p{color:#d8dde1;max-width:640px;font-size:18px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.trust{border:1px solid #47515a;border-radius:18px;padding:26px;background:rgba(255,255,255,.04)}.trust strong{display:block;color:var(--gold);font-size:30px}.trust .item{padding:15px 0;border-bottom:1px solid #3a444d}.trust .item:last-child{border:0}.trust span{display:block;color:#c9d0d5;font-size:13px}
 section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section-head h2{font-size:clamp(28px,4vw,42px);line-height:1.15;margin:10px 0}.section-head p{color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:25px;box-shadow:0 8px 25px rgba(20,25,30,.035)}.icon{width:46px;height:46px;border-radius:12px;background:#f5ebd4;color:#75571e;display:grid;place-items:center;font-size:23px}.card h3{margin:16px 0 8px}.card p{margin:0;color:var(--muted);font-size:15px}.steps{background:#fff}.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.step{border-top:3px solid var(--gold);padding:18px;background:var(--cream);border-radius:0 0 12px 12px}.step b{font-size:13px;color:#8a6828;letter-spacing:.08em}.step h3{margin:8px 0}.step p{font-size:14px;color:var(--muted);margin:0}.apply-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:34px;align-items:start}.apply-copy{background:var(--ink);color:white;border-radius:16px;padding:28px}.apply-copy p{color:#d2d8dc}.apply-copy li{margin:10px 0;color:#e1e5e8}.form{background:white;border:1px solid var(--line);border-radius:16px;padding:28px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input,select,textarea{width:100%;padding:12px;border:1px solid #d8dce0;border-radius:8px;background:white;font:inherit;color:var(--ink)}textarea{min-height:110px;resize:vertical}.hint{font-size:12px;color:var(--muted);margin-top:10px}.notice{display:none;margin-top:12px;padding:12px;background:#fff4d7;border-radius:8px;color:#624a18;font-size:14px}
 .contact{background:#111a22;color:white}.contact .section-head p{color:#c9d0d5}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}.contact-box{border:1px solid #3d4852;border-radius:14px;padding:24px}.contact-box p{color:#c9d0d5}.contact-box a{color:var(--gold)}footer{background:#0b1116;color:#aeb7bf;padding:22px 0;font-size:13px}.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-@media(max-width:800px){.links{display:none;position:absolute;top:70px;left:0;right:0;padding:20px 4%;background:#101820;flex-direction:column;align-items:flex-start}.links.open{display:flex}.menu{display:block}.hero{padding:62px 0}.hero-grid,.apply-grid,.contact-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.steps-grid{grid-template-columns:1fr 1fr}.trust{max-width:520px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
-@media(max-width:460px){.steps-grid{grid-template-columns:1fr}.brand{font-size:13px}.hero p{font-size:16px}section{padding:54px 0}}
+
+.campus{background:#fff}.campus-tabs{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.campus-tabs a{border:1px solid var(--line);border-radius:30px;padding:9px 16px;font-size:14px;font-weight:700}.campus-tabs a:hover{background:var(--ink);color:#fff}.campus-label{margin:28px 0 14px;font-size:21px}.campus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.campus-card{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--cream)}.campus-card img{display:block;width:100%;height:210px;object-fit:cover}.campus-card div{padding:17px}.campus-card b,.campus-card span{display:block}.campus-card span{font-size:14px;color:var(--muted);margin-top:5px}
+
+@media(max-width:800px){.campus-grid{grid-template-columns:1fr 1fr}.links{display:none;position:absolute;top:70px;left:0;right:0;padding:20px 4%;background:#101820;flex-direction:column;align-items:flex-start}.links.open{display:flex}.menu{display:block}.hero{padding:62px 0}.hero-grid,.apply-grid,.contact-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.steps-grid{grid-template-columns:1fr 1fr}.trust{max-width:520px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(max-width:460px){.campus-grid{grid-template-columns:1fr}.steps-grid{grid-template-columns:1fr}.brand{font-size:13px}.hero p{font-size:16px}section{padding:54px 0}}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#accueil"><span class="mark">P</span><span>P-GLOBAL CONSULTING<small>ÉTUDES • ORIENTATION • ACCOMPAGNEMENT</small></span></a>
 <button class="menu" id="menu" aria-label="Ouvrir le menu">☰</button>
-<nav class="links" id="links"><a href="#services">Nos services</a><a href="#methode">Comment ça marche</a><a href="#candidature">Candidature</a><a href="#contact">Contact</a><a class="btn" href="#candidature">Commencer</a></nav>
+<nav class="links" id="links"><a href="#services">Nos services</a><a href="#methode">Comment ça marche</a><a href="#campus">Campus</a><a href="#candidature">Candidature</a><a href="#contact">Contact</a><a class="btn" href="#candidature">Commencer</a></nav>
 </div></header>
 <main>
 <section class="hero" id="accueil"><div class="wrap hero-grid"><div>
@@ -46,6 +49,15 @@ section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section
 <div class="step"><b>ÉTAPE 03</b><h3>Préparation</h3><p>Vous préparez votre dossier et suivez les prochaines actions.</p></div>
 <div class="step"><b>ÉTAPE 04</b><h3>Suivi</h3><p>Nous vous accompagnons dans les démarches convenues.</p></div>
 </div></div></section>
+<section id="campus" class="campus"><div class="wrap"><div class="section-head"><div class="eyebrow">La vie universitaire</div><h2>Découvrez votre futur environnement d’études</h2><p>Un aperçu des espaces que vous pourrez retrouver dans les universités en Chine et à l’international. Les images sont illustratives : les installations varient selon chaque établissement.</p></div><div class="campus-tabs"><a href="#campus-chine">Universités en Chine</a><a href="#campus-international">Universités internationales</a></div><h3 id="campus-chine" class="campus-label">En Chine</h3><div class="campus-grid">
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80" alt="Bâtiment universitaire et campus"/><div><b>Campus et espaces verts</b><span>Des environnements propices aux études et à la vie étudiante.</span></div></article>
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80" alt="Salle de classe lumineuse"/><div><b>Salles de cours</b><span>Des espaces d’apprentissage et de travail.</span></div></article>
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1574629810360-7ef35b1a4b4b?auto=format&fit=crop&w=900&q=80" alt="Terrain de sport"/><div><b>Stades et installations sportives</b><span>Des lieux dédiés au sport et aux activités universitaires.</span></div></article>
+</div><h3 id="campus-international" class="campus-label">À l’international</h3><div class="campus-grid">
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80" alt="Étudiants sur un campus"/><div><b>Vie de campus</b><span>Des communautés étudiantes et des espaces de rencontre.</span></div></article>
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=900&q=80" alt="Bibliothèque universitaire"/><div><b>Bibliothèques et espaces d’étude</b><span>Des lieux calmes pour apprendre et faire des recherches.</span></div></article>
+<article class="campus-card"><img loading="lazy" src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=900&q=80" alt="Chambre en résidence étudiante"/><div><b>Hébergement étudiant</b><span>Exemples d’aménagements de chambres, parfois partagées à deux selon les résidences.</span></div></article>
+</div></div></section>
 <section id="candidature"><div class="wrap apply-grid"><div class="apply-copy"><div class="eyebrow">Parlons de votre projet</div><h2>Commencez votre demande</h2><p>Remplissez le formulaire. Nous pourrons ensuite examiner votre demande et vous indiquer les prochaines étapes.</p><ul><li>Indiquez des coordonnées exactes.</li><li>Ne transmettez pas de mot de passe ni d’informations bancaires.</li><li>N’envoyez pas de documents sensibles avant d’avoir vérifié le canal de contact officiel.</li></ul></div>
 <form class="form" id="application"><h3>Formulaire de prise de contact</h3><div class="form-grid">
 <div class="field"><label for="name">Nom complet *</label><input id="name" name="name" required autocomplete="name" placeholder="Votre nom"></div>
@@ -55,16 +67,53 @@ section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section
 <div class="field"><label for="service">Service souhaité *</label><select id="service" name="service" required><option value="">Choisir</option><option>Bourse d’études</option><option>Admission universitaire</option><option>Assistance visa</option><option>Orientation académique</option><option>Accueil et installation</option></select></div>
 <div class="field"><label for="level">Niveau d’études</label><select id="level" name="level"><option value="">Choisir</option><option>Lycée</option><option>Licence</option><option>Master</option><option>Doctorat</option><option>Autre</option></select></div>
 <div class="field full"><label for="message">Parlez-nous de votre projet</label><textarea id="message" name="message" placeholder="Votre niveau, votre domaine et votre objectif…"></textarea></div>
-<div class="field full"><button class="btn" type="submit">Préparer ma demande</button><p class="hint">Version de démonstration : le formulaire n’envoie pas encore vos données. La connexion sécurisée à Supabase sera configurée dans une étape suivante.</p><div class="notice" id="notice" role="status">Le formulaire est prêt pour les tests visuels, mais il n’est pas encore connecté. Aucune donnée n’a été envoyée.</div></div>
+<div class="field full"><button class="btn" type="submit">Préparer ma demande</button><p class="hint">Vos informations seront utilisées uniquement pour traiter votre demande et vous recontacter.</p><div class="notice" id="notice" role="status" aria-live="polite"></div></div>
 </div></form></div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="section-head"><div class="eyebrow">Contact</div><h2>Parlons de votre avenir</h2><p>Contactez P-GLOBAL CONSULTING pour présenter votre projet et connaître les prochaines étapes.</p></div><div class="contact-grid"><div class="contact-box"><h3>Écrivez-nous</h3><p>Contactez-nous par e-mail ou directement sur WhatsApp. Choisissez le numéro qui vous convient.</p><p><strong>E-mail :</strong> <a href="mailto:Dazoln19@gmail.com">Dazoln19@gmail.com</a></p><p><strong>WhatsApp 1 :</strong> <a href="https://wa.me/24268728865" target="_blank" rel="noopener">+242 06 872 8865</a></p><p><strong>WhatsApp 2 :</strong> <a href="https://wa.me/24264172324" target="_blank" rel="noopener">+242 06 417 2324</a></p></div><div class="contact-box"><h3>Notre engagement</h3><p>Nous privilégions la clarté, la confidentialité et un accompagnement responsable. Aucune bourse, admission ou délivrance de visa ne peut être garantie.</p><a class="btn" href="#candidature">Présenter mon projet</a></div></div></div></section>
 </main>
 <footer><div class="wrap footer-row"><span>© <span id="year"></span> P-GLOBAL CONSULTING. Tous droits réservés.</span><span>Votre avenir, notre engagement.</span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-document.getElementById('menu').addEventListener('click',()=>document.getElementById('links').classList.toggle('open'));
+const SUPABASE_URL = 'https://biphdhhqafuypwtfkcvr.supabase.co';
+// Remplacer cette valeur par la clé publique (publishable/anon) du projet Supabase.
+const SUPABASE_ANON_KEY = 'sb_publishable_6fNwLYf7PctmdDwms6HXIg_4uuo3qCh';
+const menu=document.getElementById('menu');
+menu.addEventListener('click',()=>document.getElementById('links').classList.toggle('open'));
 document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('links').classList.remove('open')));
 document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('application').addEventListener('submit',e=>{e.preventDefault();document.getElementById('notice').style.display='block';});
+const form=document.getElementById('application');
+const notice=document.getElementById('notice');
+const submitButton=form.querySelector('button[type="submit"]');
+const client=window.supabase
+  ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY)
+  : null;
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  notice.style.display='block';
+
+  if(!client || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY==='COLLER_ICI_LA_CLE_PUBLIQUE_SUPABASE'){
+    notice.textContent='Le formulaire n’est pas encore connecté. Veuillez nous contacter par WhatsApp.';
+    return;
+  }
+
+  const data=Object.fromEntries(new FormData(form).entries());
+  notice.textContent='Envoi de votre demande…';
+  if(submitButton) submitButton.disabled=true;
+
+  try {
+    const {error}=await client.from('applications').insert([data]);
+    if(error) throw error;
+
+    form.reset();
+    notice.textContent='Merci ! Votre demande a bien été envoyée. Notre équipe vous recontactera.';
+  } catch(error) {
+    console.error('Erreur Supabase :',error);
+    notice.textContent='Votre demande n’a pas pu être envoyée. Veuillez réessayer ou nous contacter par WhatsApp.';
+  } finally {
+    if(submitButton) submitButton.disabled=false;
+  }
+});
 </script>
 </body>
 </html>
