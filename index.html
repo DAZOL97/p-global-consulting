@@ -95,7 +95,7 @@ section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section
 <div class="upload-field"><label for="medical">6. Certificat médical *</label><input id="medical" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></div>
 <div class="upload-field"><label for="bank">7. Relevés bancaires *</label><input id="bank" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></div>
 <div class="upload-field"><label for="english">8. Certificat d’anglais *</label><input id="english" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></div>
-<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes) *</label><input id="video" type="file" accept=".mp4,.mov,video/mp4,video/quicktime" required><small>MP4 ou MOV · 2 minutes maximum · 100 Mo maximum.</small></div>
+<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes) *</label><input id="video" type="file" accept=".mp4,.mov,video/mp4,video/quicktime" required><small>MP4 ou MOV · 2 minutes maximum · 50 Mo maximum.</small></div>
 </div>
 <label class="consent"><input id="privacyConsent" type="checkbox" required><span>J’autorise P-GLOBAL CONSULTING à utiliser ces documents uniquement pour l’étude et le suivi de ma candidature. Je comprends qu’ils contiennent des informations personnelles sensibles.</span></label>
 <div class="upload-progress" id="uploadProgress" role="status" aria-live="polite"></div></div>
@@ -127,7 +127,7 @@ form.addEventListener('submit',async e=>{
  e.preventDefault(); notice.style.display='block';
  if(!client){notice.textContent='Le formulaire n’est pas connecté à Supabase.';return;}
  const selected={};
- for(const [id,key] of uploadSpecs){const input=document.getElementById(id),file=input.files[0];if(!file){notice.textContent='Veuillez joindre les 9 fichiers demandés.';return;}const video=id==='video';if(file.size>(video?100:10)*1024*1024){notice.textContent=video?'Vidéo limitée à 100 Mo.':'Chaque document est limité à 10 Mo.';return;}if(id==='photo'&&file.type!=='image/jpeg'){notice.textContent='La photo doit être au format JPEG.';return;}if(video&&!['video/mp4','video/quicktime'].includes(file.type)){notice.textContent='La vidéo doit être au format MP4 ou MOV.';return;}selected[key]=file;}
+ for(const [id,key] of uploadSpecs){const input=document.getElementById(id),file=input.files[0];if(!file){notice.textContent='Veuillez joindre les 9 fichiers demandés.';return;}const video=id==='video';if(file.size>(video?50:10)*1024*1024){notice.textContent=video?'Vidéo limitée à 50 Mo.':'Chaque document est limité à 10 Mo.';return;}if(id==='photo'&&file.type!=='image/jpeg'){notice.textContent='La photo doit être au format JPEG.';return;}if(video&&!['video/mp4','video/quicktime'].includes(file.type)){notice.textContent='La vidéo doit être au format MP4 ou MOV.';return;}selected[key]=file;}
  try{await checkVideoDuration(selected.presentation_video);}catch(err){notice.textContent=err.message;return;}
  const data=Object.fromEntries(new FormData(form).entries());
  const applicationId=crypto.randomUUID?crypto.randomUUID():Date.now().toString();
@@ -137,7 +137,7 @@ form.addEventListener('submit',async e=>{
   data.message=[data.message||'','Fichiers déposés (bucket privé) : '+JSON.stringify(uploaded)].filter(Boolean).join('\n');
   const {error}=await client.from('applications').insert([data]);if(error)throw error;
   form.reset();progress.textContent='Documents transmis.';notice.textContent='Merci ! Votre candidature et vos documents ont été envoyés. Notre équipe vous recontactera.';
- }catch(error){console.error('Erreur Supabase :',error);notice.textContent='Échec de l’envoi. Le bucket privé "application-documents" et ses règles d’accès doivent être configurés dans Supabase.';progress.textContent='Vérifiez Supabase : certains fichiers peuvent déjà avoir été téléversés.';}
+ }catch(error){console.error('Erreur Supabase :',error);notice.textContent='Échec de l’envoi. Vérifiez votre connexion et réessayez. Si le problème continue, contactez P-GLOBAL CONSULTING.';progress.textContent='Vérifiez Supabase : certains fichiers peuvent déjà avoir été téléversés.';}
  finally{if(submitButton)submitButton.disabled=false;}
 });
 </script>
