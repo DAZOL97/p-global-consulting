@@ -36,14 +36,15 @@ body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}bod
 .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-field{display:flex;flex-direction:column;gap:6px}.admin-field input{width:100%}
 .admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.admin-table-wrap{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse;font-size:14px}.admin-table th,.admin-table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.admin-table th{background:#f8f5ee}.admin-doc{display:inline-block;margin:3px 6px 3px 0;color:#75571e;text-decoration:underline;cursor:pointer}.admin-error{color:#b42318}.admin-muted{color:var(--muted);font-size:13px}
 @media(max-width:600px){.admin-grid{grid-template-columns:1fr}.admin-card{padding:17px}.admin-table{font-size:12px}}
-/* Administration mobile: afficher chaque candidature comme une fiche lisible */
-@media(max-width:700px){
+/* Fiches candidat : affichage mobile et tablette, sans tableau horizontal */
+@media(max-width:900px){
+ .admin-panel .wrap{width:min(100% - 24px,680px)}
  .admin-table-wrap{overflow:visible;width:100%}
- .admin-table{display:block;width:100%;font-size:14px}
- .admin-table thead{display:none}
- .admin-table tbody{display:block;width:100%}
- .admin-table tr{display:block;width:100%;margin:0 0 16px;padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 4px 14px rgba(20,25,30,.04)}
- .admin-table td{display:grid;grid-template-columns:minmax(105px,34%) minmax(0,1fr);gap:10px;width:100%;padding:9px 0;border-bottom:1px solid #eee9df;overflow-wrap:anywhere;word-break:break-word}
+ .admin-table{display:block;width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+ .admin-table thead{display:none !important}
+ .admin-table tbody{display:flex;flex-direction:column;gap:14px;width:100%}
+ .admin-table tr{display:block;width:100%;margin:0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 4px 14px rgba(20,25,30,.05)}
+ .admin-table td{display:grid;grid-template-columns: minmax(105px,34%) minmax(0,1fr);gap:12px;width:100%;padding:11px 0;border:0;border-bottom:1px solid #eee9df;text-align:left;overflow-wrap:anywhere;word-break:break-word}
  .admin-table td:last-child{border-bottom:0}
  .admin-table td:nth-child(1)::before{content:"Date"}
  .admin-table td:nth-child(2)::before{content:"Candidat"}
@@ -51,9 +52,9 @@ body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}bod
  .admin-table td:nth-child(4)::before{content:"Destination / service"}
  .admin-table td:nth-child(5)::before{content:"État du dossier"}
  .admin-table td:nth-child(6)::before{content:"Documents"}
- .admin-table td::before{font-weight:700;color:var(--muted);font-size:12px}
+ .admin-table td::before{font-weight:700;color:var(--muted);font-size:12px;line-height:1.5}
  .admin-table td>*{min-width:0}
- .admin-doc{overflow-wrap:anywhere}
+ .admin-doc{overflow-wrap:anywhere;margin:4px 8px 4px 0}
 }
 
 
@@ -115,17 +116,17 @@ body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}bod
 <div class="field"><label for="choice1">Première filière choisie *</label><input id="choice1" name="study_choice_1" required placeholder="Ex. Gestion financière"></div>
 <div class="field"><label for="choice2">Deuxième filière choisie *</label><input id="choice2" name="study_choice_2" required placeholder="Ex. Informatique"></div>
 <div class="field full"><label for="message">Parlez-nous de votre projet</label><textarea id="message" name="message" placeholder="Votre niveau, votre domaine et votre objectif…"></textarea></div>
-<div class="field full upload-section"><h4>Documents disponibles (facultatifs)</h4><p class="hint">Vous pouvez envoyer les documents que vous avez déjà. Les autres pourront être ajoutés plus tard avec l’aide de P-GLOBAL CONSULTING. PDF, JPG ou PNG selon le document. 10 Mo maximum par document.</p>
+<div class="field full upload-section"><h4>Documents à fournir</h4><p class="hint">Vous pouvez envoyer les documents que vous avez déjà. Les autres pourront être ajoutés plus tard avec l’aide de P-GLOBAL CONSULTING. PDF, JPG ou PNG selon le document. 10 Mo maximum par document.</p>
 <div class="upload-grid">
-<div class="upload-field"><label for="passport">1. Passeport (facultatif)</label><input id="passport" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-passport">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="photo">2. Photo d’identité (JPEG, facultatif)</label><input id="photo" type="file" accept=".jpg,.jpeg,image/jpeg"><small>JPEG uniquement.</small><small class="file-status" id="status-photo">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="diploma">3. Diplôme ou attestation de réussite (facultatif)</label><input id="diploma" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-diploma">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="transcript">4. Relevé de notes (facultatif)</label><input id="transcript" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-transcript">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="police">5. Casier judiciaire (facultatif)</label><input id="police" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-police">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="medical">6. Certificat médical (facultatif)</label><input id="medical" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-medical">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="bank">7. Relevés bancaires (facultatif)</label><input id="bank" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-bank">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="english">8. Certificat d’anglais (facultatif)</label><input id="english" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-english">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes, facultative)</label><input id="video" type="file" accept=".mp4,.mov,video/mp4,video/quicktime"><small>MP4 ou MOV · 2 minutes maximum · 50 Mo maximum.</small><small class="file-status" id="status-video">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="passport">1. Passeport</label><input id="passport" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-passport">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="photo">2. Photo d’identité (JPEG )</label><input id="photo" type="file" accept=".jpg,.jpeg,image/jpeg"><small>JPEG uniquement.</small><small class="file-status" id="status-photo">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="diploma">3. Diplôme ou attestation de réussite</label><input id="diploma" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-diploma">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="transcript">4. Relevé de notes</label><input id="transcript" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-transcript">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="police">5. Casier judiciaire</label><input id="police" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-police">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="medical">6. Certificat médical</label><input id="medical" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-medical">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="bank">7. Relevés bancaires</label><input id="bank" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-bank">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="english">8. Certificat d’anglais</label><input id="english" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-english">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes )</label><input id="video" type="file" accept=".mp4,.mov,video/mp4,video/quicktime"><small>MP4 ou MOV · 2 minutes maximum · 50 Mo maximum.</small><small class="file-status" id="status-video">🔴 Document manquant</small></div>
 </div>
 <label class="consent"><input id="privacyConsent" type="checkbox" required><span>J’autorise P-GLOBAL CONSULTING à utiliser ces documents uniquement pour l’étude et le suivi de ma candidature. Je comprends qu’ils contiennent des informations personnelles sensibles.</span></label>
 <div class="upload-progress" id="uploadProgress" role="status" aria-live="polite"></div></div>
