@@ -223,8 +223,8 @@ form.addEventListener('submit',async e=>{
   notice.textContent=missing.length||Object.keys(failed).length?'Votre candidature a bien été enregistrée, même si elle est incomplète. Les documents manquants ou dont le transfert a échoué seront signalés à notre équipe. Nous vous recontacterons.':'Merci ! Votre candidature et tous vos documents ont été envoyés. Notre équipe vous recontactera.';
  }catch(error){
   console.error('Erreur Supabase :',error);
-  notice.textContent='La candidature n’a pas pu être enregistrée. Vérifiez votre connexion puis réessayez. Si le problème continue, contactez P-GLOBAL CONSULTING.';
-  progress.textContent='Échec de l’enregistrement de la candidature.';
+  notice.textContent='Erreur lors de l’enregistrement : '+(error&&error.message?error.message:String(error));
+  progress.textContent='Échec : '+(error&&error.message?error.message:String(error));
  }finally{if(submitButton){submitButton.disabled=false;submitButton.textContent='Préparer ma demande';}}
 });
 </script>
