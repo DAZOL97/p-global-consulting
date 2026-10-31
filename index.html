@@ -126,7 +126,7 @@ body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}bod
 <div class="upload-field"><label for="medical">6. Certificat médical</label><input id="medical" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-medical">🔴 Document manquant</small></div>
 <div class="upload-field"><label for="bank">7. Relevés bancaires</label><input id="bank" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-bank">🔴 Document manquant</small></div>
 <div class="upload-field"><label for="english">8. Certificat d’anglais</label><input id="english" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><small class="file-status" id="status-english">🔴 Document manquant</small></div>
-<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes )</label><input id="video" type="file" accept=".mp4,.mov,video/mp4,video/quicktime"><small>MP4 ou MOV · 2 minutes maximum · 50 Mo maximum.</small><small class="file-status" id="status-video">🔴 Document manquant</small></div>
+<div class="upload-field"><label for="video">9. Vidéo de présentation (2 minutes )</label><input id="video" type="file" accept=".mp4,video/mp4"><small>MP4 uniquement · 2 minutes maximum · 50 Mo maximum.</small><small class="file-status" id="status-video">🔴 Document manquant</small></div>
 </div>
 <label class="consent"><input id="privacyConsent" type="checkbox" required><span>J’autorise P-GLOBAL CONSULTING à utiliser ces documents uniquement pour l’étude et le suivi de ma candidature. Je comprends qu’ils contiennent des informations personnelles sensibles.</span></label>
 <div class="upload-progress" id="uploadProgress" role="status" aria-live="polite"></div></div>
@@ -196,7 +196,7 @@ form.addEventListener('submit',async e=>{
   const video=id==='video';
   if(file.size>(video?50:10)*1024*1024){notice.textContent=video?'Vidéo limitée à 50 Mo.':'Chaque document est limité à 10 Mo.';input.focus();return;}
   if(id==='photo'&&file.type!=='image/jpeg'){notice.textContent='La photo doit être au format JPEG.';input.focus();return;}
-  if(video&&!['video/mp4','video/quicktime'].includes(file.type)){notice.textContent='La vidéo doit être au format MP4 ou MOV.';input.focus();return;}
+  if(video&&file.type!=='video/mp4'){notice.textContent='La vidéo doit être au format MP4.';input.focus();return;}
   selected[key]=file;
  }
  if(selected.presentation_video){try{await checkVideoDuration(selected.presentation_video);}catch(err){notice.textContent=err.message;return;}}
@@ -205,10 +205,10 @@ form.addEventListener('submit',async e=>{
  const extra=[
   ['Nom du père',fd.get('father_name')],['Téléphone du père',fd.get('father_phone')],
   ['Nom de la mère',fd.get('mother_name')],['Téléphone de la mère',fd.get('mother_phone')],
-  ['1re filière',fd.get('study_choice_1')],['2e filière',fd.get('study_choice_2')]
+  ['Niveau d’études',fd.get('level')],['1re filière',fd.get('study_choice_1')],['2e filière',fd.get('study_choice_2')]
  ].filter(([,v])=>v).map(([k,v])=>k+' : '+v).join('\n');
  const data={name:fd.get('name'),phone:fd.get('phone'),email:fd.get('email')||null,
-  country:fd.get('country'),service:fd.get('service'),level:fd.get('level')||null,
+  country:fd.get('country'),service:fd.get('service'),
   message:[fd.get('message')||'',extra].filter(Boolean).join('\n')};
  const applicationId=crypto.randomUUID?crypto.randomUUID():Date.now().toString();
  const uploaded={},failed={},missing=[];
