@@ -200,7 +200,16 @@ form.addEventListener('submit',async e=>{
   selected[key]=file;
  }
  if(selected.presentation_video){try{await checkVideoDuration(selected.presentation_video);}catch(err){notice.textContent=err.message;return;}}
- const data=Object.fromEntries(new FormData(form).entries());
+ // N’envoyer que les colonnes existantes ; conserver les nouveaux renseignements dans message.
+ const fd=new FormData(form);
+ const extra=[
+  ['Nom du père',fd.get('father_name')],['Téléphone du père',fd.get('father_phone')],
+  ['Nom de la mère',fd.get('mother_name')],['Téléphone de la mère',fd.get('mother_phone')],
+  ['1re filière',fd.get('study_choice_1')],['2e filière',fd.get('study_choice_2')]
+ ].filter(([,v])=>v).map(([k,v])=>k+' : '+v).join('\n');
+ const data={name:fd.get('name'),phone:fd.get('phone'),email:fd.get('email')||null,
+  country:fd.get('country'),service:fd.get('service'),level:fd.get('level')||null,
+  message:[fd.get('message')||'',extra].filter(Boolean).join('\n')};
  const applicationId=crypto.randomUUID?crypto.randomUUID():Date.now().toString();
  const uploaded={},failed={},missing=[];
  notice.textContent='Enregistrement de votre candidature…';progress.style.display='block';
