@@ -36,6 +36,26 @@ body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}bod
 .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-field{display:flex;flex-direction:column;gap:6px}.admin-field input{width:100%}
 .admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.admin-table-wrap{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse;font-size:14px}.admin-table th,.admin-table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.admin-table th{background:#f8f5ee}.admin-doc{display:inline-block;margin:3px 6px 3px 0;color:#75571e;text-decoration:underline;cursor:pointer}.admin-error{color:#b42318}.admin-muted{color:var(--muted);font-size:13px}
 @media(max-width:600px){.admin-grid{grid-template-columns:1fr}.admin-card{padding:17px}.admin-table{font-size:12px}}
+/* Administration mobile: afficher chaque candidature comme une fiche lisible */
+@media(max-width:700px){
+ .admin-table-wrap{overflow:visible;width:100%}
+ .admin-table{display:block;width:100%;font-size:14px}
+ .admin-table thead{display:none}
+ .admin-table tbody{display:block;width:100%}
+ .admin-table tr{display:block;width:100%;margin:0 0 16px;padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 4px 14px rgba(20,25,30,.04)}
+ .admin-table td{display:grid;grid-template-columns:minmax(105px,34%) minmax(0,1fr);gap:10px;width:100%;padding:9px 0;border-bottom:1px solid #eee9df;overflow-wrap:anywhere;word-break:break-word}
+ .admin-table td:last-child{border-bottom:0}
+ .admin-table td:nth-child(1)::before{content:"Date"}
+ .admin-table td:nth-child(2)::before{content:"Candidat"}
+ .admin-table td:nth-child(3)::before{content:"Contact"}
+ .admin-table td:nth-child(4)::before{content:"Destination / service"}
+ .admin-table td:nth-child(5)::before{content:"État du dossier"}
+ .admin-table td:nth-child(6)::before{content:"Documents"}
+ .admin-table td::before{font-weight:700;color:var(--muted);font-size:12px}
+ .admin-table td>*{min-width:0}
+ .admin-doc{overflow-wrap:anywhere}
+}
+
 
 </style>
 </head>
