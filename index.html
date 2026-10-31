@@ -142,7 +142,7 @@ const client=window.supabase
   : null;
 
 // Espace administrateur : accessible via /#admin.
-const ADMIN_UID='c34338fa-9a2d-4eb6-9b9f-a36c8b383baa';
+const ADMIN_UID='c3438fa9-a2db-4eb6-9b9f-a36c8b383baa';
 const adminPanel=document.getElementById('adminPanel');
 function setAdminMode(){const on=location.hash==='#admin';document.body.classList.toggle('admin-mode',on);if(on){window.scrollTo(0,0);checkAdminSession();}}
 window.addEventListener('hashchange',setAdminMode);setAdminMode();
