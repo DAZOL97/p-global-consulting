@@ -29,6 +29,14 @@ section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section
 @media(max-width:800px){.campus-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.campus-grid{grid-template-columns:1fr}}
 
+
+.admin-panel{display:none;min-height:75vh;padding:42px 0;background:var(--cream)}
+body.admin-mode main{display:none}body.admin-mode .admin-panel{display:block}body.admin-mode .links{display:none!important}
+.admin-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 8px 25px rgba(20,25,30,.035)}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-field{display:flex;flex-direction:column;gap:6px}.admin-field input{width:100%}
+.admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.admin-table-wrap{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse;font-size:14px}.admin-table th,.admin-table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.admin-table th{background:#f8f5ee}.admin-doc{display:inline-block;margin:3px 6px 3px 0;color:#75571e;text-decoration:underline;cursor:pointer}.admin-error{color:#b42318}.admin-muted{color:var(--muted);font-size:13px}
+@media(max-width:600px){.admin-grid{grid-template-columns:1fr}.admin-card{padding:17px}.admin-table{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -104,8 +112,31 @@ section{padding:72px 0}.section-head{max-width:700px;margin-bottom:34px}.section
 </div></form></div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="section-head"><div class="eyebrow">Contact</div><h2>Parlons de votre avenir</h2><p>Contactez P-GLOBAL CONSULTING pour présenter votre projet et connaître les prochaines étapes.</p></div><div class="contact-grid"><div class="contact-box"><h3>Écrivez-nous</h3><p>Contactez-nous par e-mail ou directement sur WhatsApp. Choisissez le numéro qui vous convient.</p><p><strong>E-mail :</strong> <a href="mailto:Dazoln19@gmail.com">Dazoln19@gmail.com</a></p><p><strong>WhatsApp 1 :</strong> <a href="https://wa.me/24268728865" target="_blank" rel="noopener">+242 06 872 8865</a></p><p><strong>WhatsApp 2 :</strong> <a href="https://wa.me/24264172324" target="_blank" rel="noopener">+242 06 417 2324</a></p></div><div class="contact-box"><h3>Notre engagement</h3><p>Nous privilégions la clarté, la confidentialité et un accompagnement responsable. Aucune bourse, admission ou délivrance de visa ne peut être garantie.</p><a class="btn" href="#candidature">Présenter mon projet</a></div></div></div></section>
 </main>
+
+<section class="admin-panel" id="adminPanel"><div class="wrap">
+ <div class="section-head"><div class="eyebrow">Espace privé</div><h2>Administration P-GLOBAL CONSULTING</h2><p>Connectez-vous pour consulter les candidatures et accéder aux documents transmis.</p></div>
+ <div class="admin-card" id="adminLoginCard"><h3>Connexion administrateur</h3><form id="adminLoginForm" class="admin-grid">
+  <div class="admin-field"><label for="adminEmail">Adresse e-mail</label><input id="adminEmail" type="email" autocomplete="username" required value="Dazoln19@gmail.com"></div>
+  <div class="admin-field"><label for="adminPassword">Mot de passe</label><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Votre mot de passe"></div>
+  <div class="field full"><button class="btn" type="submit" id="adminLoginButton">Se connecter</button><p class="admin-muted" id="adminLoginMessage" role="status"></p></div>
+ </form></div>
+ <div class="admin-card" id="adminDashboard" style="display:none"><div class="admin-toolbar"><h3 style="margin-right:auto">Candidatures reçues</h3><button class="btn" id="refreshApplications" type="button">Actualiser</button><button class="btn secondary" id="adminLogout" type="button" style="background:#101820;color:#fff">Déconnexion</button></div><p class="admin-muted" id="adminCount">Chargement…</p><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Date</th><th>Candidat</th><th>Contact</th><th>Destination / service</th><th>Documents</th></tr></thead><tbody id="adminRows"></tbody></table></div><p class="admin-muted">Les liens de téléchargement sont temporaires et réservés à l’administrateur connecté.</p></div>
+ <p><a href="#accueil" class="admin-muted">← Retour au site</a></p>
+</div></section>
+
 <footer><div class="wrap footer-row"><span>© <span id="year"></span> P-GLOBAL CONSULTING. Tous droits réservés.</span><span>Votre avenir, notre engagement.</span></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+// Espace administrateur : accessible via /#admin.
+const ADMIN_UID='c34338fa-9a2d-4eb6-9b9f-a36c8b383baa';
+const adminPanel=document.getElementById('adminPanel');
+function setAdminMode(){const on=location.hash==='#admin';document.body.classList.toggle('admin-mode',on);if(on){window.scrollTo(0,0);checkAdminSession();}}
+window.addEventListener('hashchange',setAdminMode);setAdminMode();
+async function checkAdminSession(){if(!client)return;const {data}=await client.auth.getSession();if(data.session&&data.session.user.id===ADMIN_UID){document.getElementById('adminLoginCard').style.display='none';document.getElementById('adminDashboard').style.display='block';loadApplications();}else{document.getElementById('adminLoginCard').style.display='block';document.getElementById('adminDashboard').style.display='none';}}
+document.getElementById('adminLoginForm').addEventListener('submit',async e=>{e.preventDefault();const msg=document.getElementById('adminLoginMessage'),btn=document.getElementById('adminLoginButton');btn.disabled=true;msg.textContent='Connexion…';try{const email=document.getElementById('adminEmail').value.trim(),password=document.getElementById('adminPassword').value;const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;if(!data.user||data.user.id!==ADMIN_UID){await client.auth.signOut();throw new Error('Ce compte n’est pas autorisé à accéder à cet espace.');}msg.textContent='Connexion réussie.';await checkAdminSession();}catch(err){msg.textContent=err.message||'Connexion impossible.';msg.className='admin-error';}finally{btn.disabled=false;}});
+async function loadApplications(){const rows=document.getElementById('adminRows'),count=document.getElementById('adminCount');rows.innerHTML='';count.textContent='Chargement des candidatures…';const {data,error}=await client.from('applications').select('*').order('created_at',{ascending:false});if(error){count.textContent='Impossible de charger les candidatures : '+error.message;count.className='admin-error';return;}count.textContent=data.length+' candidature(s) enregistrée(s).';for(const app of data){const tr=document.createElement('tr');const raw=String(app.message||'');let status={};const marker='STATUT_DOCUMENTS:';const pos=raw.indexOf(marker);if(pos>=0){try{status=JSON.parse(raw.slice(pos+marker.length).trim());}catch(_){}}const message=pos>=0?raw.slice(0,pos).trim():raw;const docs=status.fichiers||{};const docNames={passport:'Passeport',identity_photo:'Photo',diploma:'Diplôme',transcript:'Relevé de notes',criminal_record:'Casier judiciaire',medical_certificate:'Certificat médical',bank_statement:'Relevé bancaire',english_certificate:'Certificat anglais',presentation_video:'Vidéo'};const docCell=document.createElement('td');const received=Object.keys(docs);docCell.append(received.length+' document(s) reçu(s)');for(const [key,path] of Object.entries(docs)){const link=document.createElement('a');link.href='#';link.className='admin-doc';link.textContent='↓ '+(docNames[key]||key);link.addEventListener('click',async ev=>{ev.preventDefault();link.textContent='Préparation…';const {data:signed,error:signError}=await client.storage.from('application-documents').createSignedUrl(path,60);if(signError){link.textContent='Erreur de téléchargement';alert(signError.message);return;}window.open(signed.signedUrl,'_blank','noopener');link.textContent='↓ '+(docNames[key]||key);});docCell.append(document.createElement('br'),link);}const missing=(status.documents_manquants||[]);if(missing.length){const small=document.createElement('div');small.className='admin-muted';small.textContent='Manquants : '+missing.map(k=>docNames[k]||k).join(', ');docCell.append(small);}const vals=[app.created_at?new Date(app.created_at).toLocaleString('fr-FR'):'—',app.name||'—',(app.phone||'—')+(app.email?' / '+app.email:''),(app.country||'—')+' / '+(app.service||'—')];for(const value of vals){const td=document.createElement('td');td.textContent=value;tr.append(td);}tr.append(docCell);rows.append(tr);}}
+document.getElementById('refreshApplications').addEventListener('click',loadApplications);document.getElementById('adminLogout').addEventListener('click',async()=>{await client.auth.signOut();await checkAdminSession();});
+
+</script>
 <script>
 const SUPABASE_URL = 'https://biphdhhqafuypwtfkcvr.supabase.co';
 // Remplacer cette valeur par la clé publique (publishable/anon) du projet Supabase.
